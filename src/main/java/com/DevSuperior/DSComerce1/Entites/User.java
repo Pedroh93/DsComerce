@@ -13,6 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String Name;
+    @Column(unique = true)
     private String Email;
     private String phone;
     private LocalDate bithDate;
