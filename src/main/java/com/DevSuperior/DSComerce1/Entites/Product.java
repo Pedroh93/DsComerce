@@ -3,6 +3,7 @@ package com.DevSuperior.DSComerce1.Entites;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 @Entity
 @Table(name = "tb_product")
@@ -24,6 +25,8 @@ public class Product {
     private Set<Category> categories= new HashSet<>();
     public Product() {
     }
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items =new HashSet<>();
 
     public Product(Long id, String name, String description, double price, String imgUrl) {
         this.id = id;
@@ -76,5 +79,12 @@ public class Product {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
+    }
+    public List<Order> getOrders(){
+        return items.stream().map(x -> x.getOrder()).toList();
     }
 }
